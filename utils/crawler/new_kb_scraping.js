@@ -114,6 +114,8 @@ async function detail_crawling(href){
     book_detail["review"] = review
     book_obj_arr.push(book_detail)
 
+    browser.close()
+
 }
 
 
