@@ -4,8 +4,6 @@ const axios = require("axios")
 const cheerio = require("cheerio")
 const puppeteer = require("puppeteer")
 const fs = require('fs');
-const { json } = require("express");
-const { url } = require("inspector");
 
 
 //지연함수
@@ -40,15 +38,13 @@ async function Paging_crawling(href){
     await sleep(5000)
     
     //해당 페이지 내에 있는 모든 책 url 가져오기
-    for(let i= 1; i < 11; i++){
-        let url = $(`#tabRoot > div.view_type_list.switch_prod_wrap > ol:nth-child(1) > li:nth-child(${i}) > div.prod_area.horizontal > div.prod_info_box > a`).attr("href")
-        book_urls.push(url)
+    for(let i= 1; i < 21; i++){
+        let url = $(`#homeTabAll > div.switch_prod_wrap.view_type_list > ol > li:nth-child(${i}) > div.prod_area.horizontal > div.prod_thumb_box.size_lg > a`).attr("href")
+        if(url){
+            book_urls.push(url)
+        }
         
-    }
-    
-    for(let i= 1; i < 11; i++){
-        let url = $(`#tabRoot > div.view_type_list.switch_prod_wrap > ol:nth-child(3) > li:nth-child(${i}) > div.prod_area.horizontal > div.prod_info_box > a`).attr("href")
-        book_urls.push(url)
+        
     }
 
     await browser.close()
@@ -178,7 +174,10 @@ async function main(first, last){
 
     await get_books_url(first, last)
 
-    await book_detail_list(first, last)
+    if(book_urls.length > 0){
+
+        await book_detail_list(first, last)
+    }
 }
 
 main(1, 26)
