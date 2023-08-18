@@ -7,4 +7,5 @@ bp = Blueprint('main', __name__, url_prefix='/')
 #  메인 페이지
 @bp.route('/')
 def main():
-    return "메인 페이지"
+
+    return render_template('index.html')
