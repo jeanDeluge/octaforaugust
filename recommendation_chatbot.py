@@ -23,8 +23,10 @@ def recommend(text):
     r = random.randint(0, 5)
 
     word = f"책 제목: {df_result.iloc[r]['title']}\n저자: {df_result.iloc[r]['author']}\n출판사: {df_result.iloc[r]['publisher']}\n리뷰 수: {int(df_result.iloc[r]['reviewnum'])}\n집중돼요/도움돼요/쉬웠어요/최고에요/추천해요 비율: {df_result.iloc[r]['score']}"
-    #print(word)
+    #print(word)Q
     return word
 
 
-recommend('자유')
+## 키워드를 자유롭게 입력하면, 키워드 코사인 유사도를 분석해서 가장 비슷한 책을 추천해줌.
+## 자유주의 국가 정치    <<-- 와 같은 형태로 띄어쓰기로 구분되어있음 입력 받을때 해당 형태로 입력받으면 가장 좋음
+# recommend('자유 행정 가난 ')
