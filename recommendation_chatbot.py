@@ -6,9 +6,10 @@ import numpy as np
 import numpy as np
 import os
 
-df=pd.read_csv('D:/web/sophia/model/recommend/newfile_concat.csv')
-df1 = pd.read_csv('D:/web/sophia/model/recommend/embeding.csv')
+df=pd.read_csv(r"D:\web\sophia\model\recommend\recommend_final.csv")
+df1 = pd.read_csv(r"D:\web\sophia\model\recommend\recommend_embedding.csv")
 model = SentenceTransformer('sentence-transformers/xlm-r-100langs-bert-base-nli-stsb-mean-tokens')
+
 
 # 추천해주는 함수
 def recommend(text):
@@ -30,3 +31,4 @@ def recommend(text):
 ## 키워드를 자유롭게 입력하면, 키워드 코사인 유사도를 분석해서 가장 비슷한 책을 추천해줌.
 ## 자유주의 국가 정치    <<-- 와 같은 형태로 띄어쓰기로 구분되어있음 입력 받을때 해당 형태로 입력받으면 가장 좋음
 # recommend('자유 행정 가난 ')
+recommend("머신러닝")
