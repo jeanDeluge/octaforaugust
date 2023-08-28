@@ -7,6 +7,7 @@ import re
 from collections import Counter
 import os
 import datetime as dt
+import pandas as pd
 
 
 modelpath = 'd:/web/sophia/model_ai/book_detection/book_detection.pt'
@@ -263,6 +264,17 @@ class Classify:
         except:
             pass
 
+        book_result = {}
+        book_result['bookshelf'] = self.imagepath.split('/')[-1]
+        book_result['unrecog_list'] =  [len(unrecog_dict)]
+        book_result['reversed_list:'] = [len(book_label_reversed_boxes)]
+        book_result['diff_list'] = [len(book_diff_list)]
+        book_result_df = pd.DataFrame(book_result)
+        # 최초 생성 이후 mode는 append
+        if not os.path.exists("D:/octaforaugust/web/sophia/static/result/output.csv"):
+            book_result_df.to_csv("D:/octaforaugust/web/sophia/static/result/output.csv", index=False, mode='w', encoding='utf-8-sig')
+        else:
+            book_result_df.to_csv("D:/octaforaugust/web/sophia/static/result/output.csv", index=False, mode='a', encoding='utf-8-sig', header=False)
 
         original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
         original_image = Image.fromarray(original_image)
